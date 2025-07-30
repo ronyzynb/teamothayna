@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Carta de Rony para Doutora.Thayna</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+  body {
+    margin: 0;
+    background: rgb(255, 182, 193); /* rosa suave em rgb */
+    font-family: 'Indie Flower', cursive;
+    overflow-x: hidden;
+    user-select: none;
+    position: relative;
+    height: 100vh;
+  }
+
+  /* Kittys flutuantes no fundo */
+  .kitty-floating {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    background-image: url('https://i.imgur.com/Yx164I5.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.9;
+    will-change: transform;
+    z-index: 0;
+  }
+
+  /* Kitty seguindo cursor */
+  #kitty-cursor {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    user-select: none;
+    background-image: url('https://i.imgur.com/9p99uH2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Container central */
+  #container {
+    position: relative;
+    max-width: 520px;
+    margin: 40px auto 20px;
+    background: #fff0f6;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+    padding: 30px 25px 60px;
+    z-index: 10;
+  }
+
+  /* Entrada cinematográfica */
+  #entrada {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #d81e5b;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: entradaFadeIn 2s forwards;
+  }
+
+  @keyframes entradaFadeIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Balão de texto */
+  #balao {
+    position: relative;
+    background: #ffd6e8;
+    border-radius: 25px;
+    padding: 20px 30px 20px 90px;
+    font-size: 1.15rem;
+    color: #9e0041;
+    line-height: 1.5;
+    box-shadow: 0 3px 8px rgba(255, 105, 180, 0.4);
+    min-height: 130px;
+    margin-bottom: 10px;
+    white-space: pre-line;
+  }
+
+  /* Imagem do kitty no balão */
+  #balao-img {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    background-color: #fff0f6;
+    object-fit: contain;
+  }
+
+  /* Botões */
+  #botoes {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  button {
+    background: #ff66a3;
+    border: none;
+    color: white;
+    padding: 12px 28px;
+    margin: 0 10px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.7);
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+
+  button:hover:not(:disabled) {
+    background: #d81e5b;
+  }
+
+  button:disabled {
+    background: #ffb6c1;
+    cursor: default;
+  }
+
+  /* Mensagem final */
+  #mensagem-final {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    color: #d81e5b;
+    font-weight: 800;
+    background: #fff0f6;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 15px #ff66a3;
+    display: none;
+    z-index: 9999;
+  }
+
+  @keyframes floatUpStraight {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-150vh); }
+  }
+  @keyframes floatUpZigzag {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(15px, -40vh); }
+    50% { transform: translate(-15px, -80vh); }
+    75% { transform: translate(15px, -120vh); }
+    100% { transform: translate(0, -150vh); }
+  }
+</style>
+</head>
+<body>
+
+<div id="kitty-cursor"></div>
+
+<!-- Gera 10 kittys pequenas flutuando -->
+<script>
+  for(let i=0; i<10; i++) {
+    const kitty = document.createElement('div');
+    kitty.classList.add('kitty-floating');
+    kitty.style.left = (Math.random()*100) + 'vw';
+    kitty.style.top = (100 + Math.random()*50) + 'vh';
+    kitty.style.opacity = 0.7 + Math.random()*0.3;
+    kitty.style.animation = `floatUp${i % 2 === 0 ? 'Zigzag' : 'Straight'} 30s linear infinite`;
+    document.body.appendChild(kitty);
+  }
+</script>
+
+<div id="container">
+  <div id="entrada">Carta aberta de Rony para Doutora.Thayna</div>
+
+  <div id="balao" style="display:none;">
+    <img id="balao-img" src="" alt="Hello Kitty" />
+    <div id="balao-text"></div>
+  </div>
+
+  <div id="botoes" style="display:none;">
+    <button id="btnAnterior" disabled>Anterior</button>
+    <button id="btnProximo">Próximo</button>
+  </div>
+</div>
+
+<div id="mensagem-final">Eu te amo como ninguém, Doutora.Thayna ❤️</div>
+
+<script>
+  const baloes = [
+    {
+      texto: `Oi oii, sei que você vai achar que o texto é por chatgpt, mas na verdade só pedi para ele corrigir
+Olha sem que é bem cara de pau minha vir aqui te enviar isso, mas quero que você leia e entenda um pouco o porque de eu ter vindo aqui por meio dessa mensagem te encher o saco.`,
+      imagem: 'https://i.imgur.com/WUohfpy.png'
+    },
+    {
+      texto: `Olha sei que infelizmente nossos caminhos foram cruzados por desentendimentos, mágoas, ego e brigas, sei que o amor de ambos esfriou ultimamente, sei que fomos um quebra cabeça bem feito que o tempo desmontou.`,
+      imagem: 'https://imgur.com/LzHinUC.png'
+    },
+    {
+      texto: `Não querendo tomar muito do seu tempo, queria que você desse uma olhada nesse projetinho que fiz especialmente para você!`,
+      imagem: 'https://imgur.com/o33l4WU.png'
+    },
+    {
+      texto: `Bom, para começo de tudo eu não venho tentar voltar ou novamente na cara de pau minha tentar recomeçar como se nada tivesse acontecido, ultimamente sei bem onde eu errei com você, comecei a reconhecer isso como homem, me deixei um pouco de lado para entender um pouco a minha volta.`,
+      imagem: 'https://imgur.com/LFdPBOL.png'
+    },
+    {
+      texto: `E nessa parada que eu fiz para reparar a minha volta eu comecei a ver o monstro que me tornei, tudo isso por culpa minha!`,
+      imagem: 'https://imgur.com/ltzf1Z0.png'
+    },
+    {
+      texto: `Comecei a olhar mais a minha volta e ver como eu fazia mal a minha mãe, como eu tratava meus pais e familiares, mesmo eles dando a vida por mim, eu comecei a ver como sou podre por dentro, isso me faz ter nojo de mim.`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Mas nisso o que realmente me fez sentir horrível por dentro foi quando eu lembrei de você, de alguns dias eu já vinha pensando como você conseguia me aturar e me aguentar mesmo eu sendo este tipo de pessoa, eu via você como a pior pessoa possível.`,
+      imagem: 'https://imgur.com/DIZGnZj.png'
+    },
+    {
+      texto: `Só que aí eu reparei que você era uma pessoa tão pura, que brilhava tanto, que eu estava vendo eu e não estava percebendo entende? e eu não estava percebendo que quem estava sendo o ruim da historia era eu.`,
+      imagem: 'https://imgur.com/d4QyH3b.png'
+    },
+    {
+      texto: `Nunca pensei que um dia eu teria chegado a um nível tão doentio como esse.`,
+      imagem: 'https://imgur.com/4QU19za.png'
+    },
+    {
+      texto: `Eu consegui entender o lado de vocês e vi como me tornei e o porque de eu ser assim, realmente fico triste e inconsolado comigo mesmo, mesmo sabendo que eu tinha tudo em minhas mãos para fluir na vida eu acreditei em minha cabeça fútil e optei por jogar isso fora...`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Eu não quero tomar seu tempo, só vim aqui pedir seu perdão por tudo que te causei, por cada lágrima derramada sua por mim, por você ter se dedicado tanto por mim, por sair de tão longe para apenas vir me ver, me perdoe por fazer você gastar seu dinheiro, por ser esse ser humano que fui com você.`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Vindo do perdão também venho te agradecer, por me mostrar que para eu amar alguém eu precise amar a mim mesmo primeiro, também agradeço por tantos incentivos e por ter me ajudado a chegar onde cheguei!`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Eu vim do zero e você tava lá comigo, palavras e pessoas eu não esqueço nunca! Mesmo tendo a memória meio ruim kk, lembro muito bem que você tava lá comigo desde o começo, realmente você estava disposta a matar e morrer por mim, eu que não soube lidar com a pessoa maravilhosa que você é!`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Bom sem querer prolongar muito é isso, eu vim aqui apenas atrás do seu perdão, nada de mais, eu vim aqui por conta que lembra que te contei que a mão de Deus sobre o pecador pesa? então, eu estou indo para a 4 queda de moto, sofri um acidente no domingo saindo cedo, carro bateu em mim e eu caí, sem contar o livramento que tive de um rapaz bêbado na avenida.`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Bom é isso eu encerro por aqui, queria muito que você me perdoasse por ter sido um filho da quenga com você, realmente me arrependo e não pretendo tentar novamente contigo, chega de te cansar e de te causar dor de cabeça.`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    },
+    {
+      texto: `Eu desejo e oro em minhas orações que você se torne uma linda médica, também que sua família estejam todos bem, um grande abraço apertado para todos por aí, e um grande beijo para você Thayna, agradeço por cada momento e por sua dedicação a mim mesmo eu não merecendo, fica com Deus Doutora.Nascimento :)`,
+      imagem: 'https://i.imgur.com/9p99uH2.png'
+    }
+  ];
+
+  let atual = -1; // Começa na entrada
+
+  const entradaEl = document.getElementById('entrada');
+  const balaoEl = document.getElementById('balao');
+  const balaoImgEl = document.getElementById('balao-img');
+  const balaoTextEl = document.getElementById('balao-text');
+  const botoesEl = document.getElementById('botoes');
+  const btnAnterior = document.getElementById('btnAnterior');
+  const btnProximo = document.getElementById('btnProximo');
+  const mensagemFinal = document.getElementById('mensagem-final');
+
+  function mostrarEntrada() {
+    entradaEl.style.display = 'block';
+    balaoEl.style.display = 'none';
+    botoesEl.style.display = 'none';
+    mensagemFinal.style.display = 'none';
+    atual = -1;
+  }
+
+  function mostrarBalao(index) {
+    if(index < 0 || index >= baloes.length) return;
+    atual = index;
+    entradaEl.style.display = 'none';
+    balaoEl.style.display = 'block';
+    botoesEl.style.display = 'block';
+    mensagemFinal.style.display = 'none';
+
+    balaoImgEl.src = baloes[index].imagem;
+    balaoTextEl.textContent = baloes[index].texto;
+
+    btnAnterior.disabled = atual === 0;
+    btnProximo.textContent = (atual === baloes.length - 1) ? 'Li o texto' : 'Próximo';
+  }
+
+  btnProximo.addEventListener('click', () => {
+    if(atual === baloes.length - 1){
+      // Finaliza mostrando mensagem
+      balaoEl.style.display = 'none';
+      botoesEl.style.display = 'none';
+      mensagemFinal.style.display = 'block';
+    } else {
+      mostrarBalao(atual + 1);
+    }
+  });
+
+  btnAnterior.addEventListener('click', () => {
+    if(atual > 0) {
+      mostrarBalao(atual - 1);
+    }
+  });
+
+  // Inicia mostrando a entrada
+  mostrarEntrada();
+
+  // Depois de 2.5s mostra o primeiro balão automaticamente (para simular efeito cinematográfico)
+  setTimeout(() => {
+    mostrarBalao(0);
+  }, 2500);
+
+  // Kitty que segue cursor
+  const kittyCursor = document.getElementById('kitty-cursor');
+  document.addEventListener('mousemove', e => {
+    kittyCursor.style.left = e.clientX + 'px';
+    kittyCursor.style.top = e.clientY + 'px';
+  });
+</script>
+
+</body>
+</html>
